@@ -14,7 +14,7 @@ $ brew install jq
 
 ### Install updater
 ```
-$ git clone <repo>
+$ git clone https://github.com/dbmathis/pcf-healthwatch-alert-updater.git
 $ cd pcf-healthwatch-alert-updater
 $ chmod +x hw-alert-updater.sh
 ```
