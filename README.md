@@ -9,8 +9,9 @@ A simple shell script to update PCF healthwatch alerts.
 ### Install dependencies jq and cf-uaac
 ```
 $ gem install cf-uaac
-$ install jq: https://stedolan.github.io/jq/download
 ```
+Install jq: https://stedolan.github.io/jq/download
+
 
 ### Install updater
 ```
