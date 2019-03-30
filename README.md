@@ -13,7 +13,7 @@ $ brew install jq
 ## Clone repositiory
 ```
 $ git clone <repo>
-
+```
 
 ## Target cf UAA and fetch a client token for haelthwatch api admin.
 ```
