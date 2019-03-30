@@ -27,7 +27,7 @@ $ uaac token client get healthwatch_api_admin -s <secret>
   
 ## Commands
 ```
-$ ./hw-alert-updater.sh options
+$ ./hw-alert-updater.sh --api <healthwatch-api> --type <type> --critical <num> --warning <num> --query <regex>
 ```
 
 ## Links associated this application.
