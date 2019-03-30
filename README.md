@@ -4,18 +4,22 @@
 A simple shell script to update PCF healthwatch alerts.
 
 
-## Install jq and cf-uaac
+## Installation
+
+### Install dependancies jq and cf-uaac
 ```
 $ gem install cf-uaac
 $ brew install jq
 ```
 
-## Clone repositiory
+### Install updater
 ```
 $ git clone <repo>
+$ cd pcf-healthwatch-alert-updater
+$ chmod +x hw-alert-updater.sh
 ```
 
-## Target cf UAA and fetch a client token for haelthwatch api admin.
+## Target CF UAA and fetch a client token for healthwatch api admin.
 ```
 $ uaac target <cf-uaa> [--skip-ssl-validation]
 $ uaac token client get healthwatch_api_admin -s <secret>
@@ -23,7 +27,6 @@ $ uaac token client get healthwatch_api_admin -s <secret>
   
 ## Commands
 ```
-$ chmod +x hw-alert-updater.sh
 $ ./hw-alert-updater.sh options
 ```
 
