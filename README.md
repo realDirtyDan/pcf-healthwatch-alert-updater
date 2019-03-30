@@ -9,12 +9,10 @@ A simple shell script to update PCF healthwatch alerts.
 ### Install dependencies cf-uaac and jq.
 
 #### uaac:
-```
-$ gem install cf-uaac
-```
+https://github.com/cloudfoundry/cf-uaac
 
 #### jq:
-Install jq: https://stedolan.github.io/jq/download
+https://stedolan.github.io/jq/download
 
 
 ### Install updater
