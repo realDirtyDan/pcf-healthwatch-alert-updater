@@ -22,18 +22,22 @@ verbose=0
 typecheck=false
 warningcheck=false
 criticalcheck=false
+querycheck=false
 
 # Define usage
 function usage {
     cat <<EOM
-Usage: $(basename "$0") [OPTION]...
-
+Usage: 
+ 
+  $(basename "$0") -a <url> -q <regexp> [-c <num>] [-w <num>] [t <text>] [-d]
+  $(basename "$0") -a <url> --get-config [-q <regexp>]
+      
   --get-config          show current alert configuration
   -d|--dry              show results without making changes to alerts
   -a|--api      STRING  healthwatch-api.SYSTEM-DOMAIN/v1/alert-configurations
   -c|--critical NUM     critical threshold
   -w|--warning  NUM     warning threshold
-  -t|--type     STRING  threeshold type
+  -t|--type     STRING  threshold type
   -q|--query    REGEX   alert query search string  
   -h|--help             show this help            
 
@@ -110,11 +114,13 @@ while :; do
         -q|--query)         # Takes an option argument; ensure it has been specified.
             if [ "$2" ]; then
                 query=$2
+                querycheck=true
                 shift
             fi 
             ;;
         --query=?*)
             query=${1#*=}   # Delete everything up to "=" and assign the remainder.
+            querycheck=true
             ;;
         -v|--verbose)
             verbose=$((verbose + 1))  # Each -v adds 1 to verbosity.
@@ -171,7 +177,7 @@ elif [ "$dry" == true ] && [ "$api" ]; then
     echo 'AFTER:'
     eval $curlcmd | jq "$jqquery"   
 # Update entities based on dynamic threshold update query
-elif [ "$api" ]; then
+elif [ "$api" ] && [ "$querycheck" == true ]; then
     eval $curlcmd | jq "$jqquery" |
     curl -d @- -H "Authorization: Bearer ${token}" -H "Accept: application/json" -H "Content-Type: application/json" "$api"
 # Display usage for all else

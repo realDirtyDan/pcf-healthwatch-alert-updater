@@ -33,22 +33,26 @@ $ uaac token client get healthwatch_api_admin -s <secret>
 *NOTICE* - do not forget to target UAA and fetch token.
 
 ```
-Usage: hw-alert-update.sh [OPTION]...
-
+Usage: 
+ 
+  hw-alert-update.sh -a <url> -q <regexp> [-c <num>] [-w <num>] [t <text>] [-d]
+  hw-alert-update.sh -a <url> --get-config [-q <regexp>]
+      
   --get-config          show current alert configuration
   -d|--dry              show results without making changes to alerts
   -a|--api      STRING  healthwatch-api.SYSTEM-DOMAIN/v1/alert-configurations
   -c|--critical NUM     critical threshold
   -w|--warning  NUM     warning threshold
-  -t|--type     STRING  threeshold type
+  -t|--type     STRING  threshold type
   -q|--query    REGEX   alert query search string  
   -h|--help             show this help            
 
 Examples:
 
   $ ./hw-alert-update.sh -a healthwatch-api.SYSTEM-DOMAIN/v1/alert-configurations --get-config
-  $ ./hw-alert-update.sh -a healthwatch-api.SYSTEM-DOMAIN/v1/alert-configurations -t UPPER -w 100 -c 200 -q 'latency.uaa' --dry
-  $ ./hw-alert-update.sh -a healthwatch-api.SYSTEM-DOMAIN/v1/alert-configurations -t UPPER -w 100 -c 200 -q 'latency.uaa'
+  $ ./hw-alert-update.sh -a healthwatch-api.SYSTEM-DOMAIN/v1/alert-configurations --get-config -q 'uaa'
+  $ ./hw-alert-update.sh -a healthwatch-api.SYSTEM-DOMAIN/v1/alert-configurations -c 200 -q 'latency.uaa' --dry
+  $ ./hw-alert-update.sh -a healthwatch-api.SYSTEM-DOMAIN/v1/alert-configurations -c 200 -q 'latency.uaa'
 ```
 
 ## Example
