@@ -30,7 +30,7 @@ $ uaac token client get healthwatch_api_admin -s <secret>
   
 ## Usage
 
-*CAUTION* - do not forget to target UAA and fetch token.
+*NOTICE* - do not forget to target UAA and fetch token.
 
 ```
 Usage: hw-alert-update.sh [OPTION]...
@@ -44,6 +44,34 @@ Usage: hw-alert-update.sh [OPTION]...
 ```
 
 ## Example
+
+*CAUTION* - It's highly recommended that you do a dry run first:
+
+```
+$ ./hw-alert-update.sh -a healthwatch-api.run-11.haas-59.pez.pivotal.io/v1/alert-configurations -c 70000 -w 20000 -t UPPER -q 'latency.uaa' --dry
+BEFORE:
+{
+  "query": "origin == 'gorouter' and name == 'latency.uaa'",
+  "threshold": {
+    "critical": 70000,
+    "warning": 10000,
+    "type": "UPPER"
+  }
+}
+
+AFTER:
+{
+  "query": "origin == 'gorouter' and name == 'latency.uaa'",
+  "threshold": {
+    "critical": 70000,
+    "warning": 20000,
+    "type": "UPPER"
+  }
+}
+```
+
+If things look correct run without the `--dry` option to commit the change:
+
 ```
 $ ./hw-alert-update.sh -a healthwatch-api.run-11.haas-59.pez.pivotal.io/v1/alert-configurations -c 70000 -w 10000 -t UPPER -q 'latency.uaa'
 {

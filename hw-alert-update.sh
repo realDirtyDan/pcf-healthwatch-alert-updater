@@ -19,6 +19,7 @@ function usage {
     cat <<EOM
 Usage: $(basename "$0") [OPTION]...
 
+  -d|--dry              show results without making changes to alerts
   -a|--api      STRING  healthwatch-api.SYSTEM-DOMAIN/v1/alert-configurations
   -c|--critical NUM     critical threshold
   -w|--warning  NUM     warning threshold
@@ -35,6 +36,9 @@ while :; do
         -h|-\?|--help)
             usage  # Display a usage synopsis.
             exit
+            ;;
+        -d|--dry)
+            dry=true        # dry run - not update to alerts
             ;;
         -a|--api)           # Takes an option argument; ensure it has been specified.
             if [ "$2" ]; then
@@ -123,9 +127,18 @@ while :; do
     shift
 done
 
-# if --api was provided
-if [ "$api" ] && [ "$critical" ] && [ "$warning" ] && [ "$type" ] && [ "$query" ]; then
-    export token=$(uaac context | grep access_token | awk '{print $2}')
+export token=$(uaac context | grep access_token | awk '{print $2}')
+
+# 
+if [ "$dry" == true ]; then
+    echo 'BEFORE:'
+    curl -sG "$api" -H "Authorization: Bearer ${token}" | 
+    jq ".[] | select(.query|test(\"${query}\"))"
+    echo ''
+    echo 'AFTER:'
+    curl -sG "$api" -H "Authorization: Bearer ${token}" |
+    jq ".[] | select(.query|test(\"${query}\")) | .threshold.critical = ${critical} | .threshold.type = \"${type}\" | .threshold.warning = ${warning}"   
+elif [ "$api" ] && [ "$critical" ] && [ "$warning" ] && [ "$type" ] && [ "$query" ]; then
     curl -sG "$api" -H "Authorization: Bearer ${token}" | 
     jq ".[] | select(.query|test(\"${query}\")) | .threshold.critical = ${critical} | .threshold.type = \"${type}\" | .threshold.warning = ${warning}" | 
     curl -d @- -H "Authorization: Bearer ${token}" -H "Accept: application/json" -H "Content-Type: application/json" "$api"
