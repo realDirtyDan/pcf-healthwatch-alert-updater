@@ -166,9 +166,8 @@ elif [ "$dry" == true ] && [ "$api" ]; then
     # Output entities after update
     echo 'AFTER:'
     curl -sG "$api" -H "Authorization: Bearer ${token}" | jq "${select} ${update}"   
-elif [ "$api" ] && [ "$critical" ] && [ "$warning" ] && [ "$type" ] && [ "$query" ]; then
+elif [ "$api" ]; then
     # Update entities
-    echo 'AFTER:'
     curl -sG "$api" -H "Authorization: Bearer ${token}" | jq "${select} ${update}" |
     curl -d @- -H "Authorization: Bearer ${token}" -H "Accept: application/json" -H "Content-Type: application/json" "$api"
 else
