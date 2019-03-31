@@ -178,8 +178,13 @@ elif [ "$dry" == true ] && [ "$api" ]; then
     eval $curlcmd | jq "$jqquery"   
 # Update entities based on dynamic threshold update query
 elif [ "$api" ] && [ "$querycheck" == true ]; then
-    eval $curlcmd | jq "$jqquery" |
-    curl -d @- -H "Authorization: Bearer ${token}" -H "Accept: application/json" -H "Content-Type: application/json" "$api"
+    # Do not allow more that one metric update at a time
+    if [ $(eval $curlcmd | jq "$basicselect" | wc -l) -le 8 ]; then
+        eval $curlcmd | jq "$jqquery" |
+        curl -d @- -H "Authorization: Bearer ${token}" -H "Accept: application/json" -H "Content-Type: application/json" "$api"
+    else
+        echo 'Update aborted due to too many query results. Refine your query to 1 result'
+    fi
 # Display usage for all else
 else
     usage
