@@ -157,7 +157,7 @@ jqquery="${select} ${update}"
 # Display alert configurations
 if [ "$config" == true ] && [ "$api" ]; then
     eval $curlcmd | jq
-# Perform a dry run
+# Perform a dry run based on dynamic threshold query
 elif [ "$dry" == true ] && [ "$api" ]; then
     # Output entities that are targeted for update
     echo 'BEFORE:'
@@ -166,10 +166,11 @@ elif [ "$dry" == true ] && [ "$api" ]; then
     # Output entities after update
     echo 'AFTER:'
     eval $curlcmd | jq "$jqquery"   
+# Update entities based on dynamic threshold query
 elif [ "$api" ]; then
-    # Update entities
     eval $curlcmd | jq "$jqquery" |
     curl -d @- -H "Authorization: Bearer ${token}" -H "Accept: application/json" -H "Content-Type: application/json" "$api"
+# Display usage for all else
 else
     usage
 fi
