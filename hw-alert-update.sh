@@ -1,4 +1,6 @@
 #!/bin/sh
+# PCF Healthwatch Alert Updater - A tool to easily update healthwatch alerts.
+# dmathis@pivotal.io
 # POSIX
 
 die() {
