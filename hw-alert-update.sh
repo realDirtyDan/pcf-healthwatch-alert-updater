@@ -40,8 +40,9 @@ Usage: $(basename "$0") [OPTION]...
 Examples:
 
   $ ./hw-alert-update.sh -a healthwatch-api.SYSTEM-DOMAIN/v1/alert-configurations --get-config
-  $ ./hw-alert-update.sh -a healthwatch-api.SYSTEM-DOMAIN/v1/alert-configurations -t UPPER -w 100 -c 200 -q 'latency.uaa' --dry
-  $ ./hw-alert-update.sh -a healthwatch-api.SYSTEM-DOMAIN/v1/alert-configurations -t UPPER -w 100 -c 200 -q 'latency.uaa'
+  $ ./hw-alert-update.sh -a healthwatch-api.SYSTEM-DOMAIN/v1/alert-configurations --get-config -q 'uaa'
+  $ ./hw-alert-update.sh -a healthwatch-api.SYSTEM-DOMAIN/v1/alert-configurations -c 200 -q 'latency.uaa' --dry
+  $ ./hw-alert-update.sh -a healthwatch-api.SYSTEM-DOMAIN/v1/alert-configurations -c 200 -q 'latency.uaa'
 EOM
     exit 2
 }
@@ -138,7 +139,7 @@ export token=$(uaac context | grep access_token | awk '{print $2}')
 # Setup curl
 curlcmd="curl -sG \"$api\" -H \"Authorization: Bearer ${token}\""
 
-# Setup jq dynamic threshold query
+# Setup dynamic threshold jq update query
 function join { local IFS="$1"; shift; echo "$*"; }
 select=".[] | select(.query|test(\"${query}\")) |"
 thresholds=()
@@ -154,19 +155,22 @@ fi
 update=$(join '|' ${thresholds[@]})
 jqquery="${select} ${update}"
 
+# Setup basic jq select query
+basicselect=".[] | select(.query|test(\"${query}\"))"
+
 # Display alert configurations
 if [ "$config" == true ] && [ "$api" ]; then
-    eval $curlcmd | jq
-# Perform a dry run based on dynamic threshold query
+    eval $curlcmd | jq "$basicselect"
+# Perform a dry run based on dynamic threshold update query
 elif [ "$dry" == true ] && [ "$api" ]; then
     # Output entities that are targeted for update
     echo 'BEFORE:'
-    eval $curlcmd | jq ".[] | select(.query|test(\"${query}\"))"
+    eval $curlcmd | jq "$basicselect"
     echo ''
     # Output entities after update
     echo 'AFTER:'
     eval $curlcmd | jq "$jqquery"   
-# Update entities based on dynamic threshold query
+# Update entities based on dynamic threshold update query
 elif [ "$api" ]; then
     eval $curlcmd | jq "$jqquery" |
     curl -d @- -H "Authorization: Bearer ${token}" -H "Accept: application/json" -H "Content-Type: application/json" "$api"
