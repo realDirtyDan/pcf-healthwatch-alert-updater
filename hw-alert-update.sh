@@ -16,7 +16,7 @@ query=
 verbose=0
 
 function usage {
-	cat <<EOM
+    cat <<EOM
 Usage: $(basename "$0") [OPTION]...
 
   -a|--api      STRING  healthwatch-api.SYSTEM-DOMAIN/v1/alert-configurations
@@ -26,6 +26,7 @@ Usage: $(basename "$0") [OPTION]...
   -q|--query    REGEX   alert query search string  
   -h|--help             show this help            
 EOM
+
     exit 2
 }
 
@@ -126,6 +127,6 @@ done
 if [ "$api" ] && [ "$critical" ] && [ "$warning" ] && [ "$type" ] && [ "$query" ]; then
     export token=$(uaac context | grep access_token | awk '{print $2}')
     curl -sG "$api" -H "Authorization: Bearer ${token}" | 
-    jq ".[] | select(.query|test(\"$query\")) | .threshold.critical = ${critical} | .threshold.type = \"${type}\" | .threshold.warning = ${warning}" | 
+    jq ".[] | select(.query|test(\"${query}\")) | .threshold.critical = ${critical} | .threshold.type = \"${type}\" | .threshold.warning = ${warning}" | 
     curl -d @- -H "Authorization: Bearer ${token}" -H "Accept: application/json" -H "Content-Type: application/json" "$api"
 fi

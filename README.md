@@ -29,6 +29,9 @@ $ uaac token client get healthwatch_api_admin -s <secret>
 ```
   
 ## Usage
+
+*CAUTION* - do not forget to target UAA and fetch token.
+
 ```
 Usage: hw-alert-update.sh [OPTION]...
 
@@ -38,6 +41,19 @@ Usage: hw-alert-update.sh [OPTION]...
   -t|--type     STRING  threeshold type
   -q|--query    REGEX   alert query search string  
   -h|--help|-?          show this help 
+```
+
+## Example
+```
+$ ./hw-alert-update.sh -a healthwatch-api.run-11.haas-59.pez.pivotal.io/v1/alert-configurations -c 70000 -w 10000 -t UPPER -q 'latency.uaa'
+{
+  "query" : "origin == 'gorouter' and name == 'latency.uaa'",
+  "threshold" : {
+    "critical" : 70000.0,
+    "type" : "UPPER",
+    "warning" : 10000.0
+  }
+}
 ```
 
 ## Maintainer
