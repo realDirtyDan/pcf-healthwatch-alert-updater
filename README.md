@@ -60,7 +60,7 @@ Examples:
 *CAUTION* - It's highly recommended that you do a dry run first and that you use well defined queries:
 
 ```
-$ ./hw-alert-update.sh -a healthwatch-api.run-11.haas-59.pez.pivotal.io/v1/alert-configurations -c 70000 -w 20000 -t UPPER -q 'latency.uaa' --dry
+$ ./hw-alert-update.sh -a healthwatch-api.run-11.haas-59.pez.pivotal.io/v1/alert-configurations -w 20000 -q 'latency.uaa' --dry
 BEFORE:
 {
   "query": "origin == 'gorouter' and name == 'latency.uaa'",
@@ -85,7 +85,7 @@ AFTER:
 If things look correct run without the `--dry` option to commit the change:
 
 ```
-$ ./hw-alert-update.sh -a healthwatch-api.run-11.haas-59.pez.pivotal.io/v1/alert-configurations -c 70000 -w 20000 -t UPPER -q 'latency.uaa'
+$ ./hw-alert-update.sh -a healthwatch-api.run-11.haas-59.pez.pivotal.io/v1/alert-configurations -w 20000 -q 'latency.uaa'
 {
   "query" : "origin == 'gorouter' and name == 'latency.uaa'",
   "threshold" : {
