@@ -156,13 +156,12 @@ jqquery="${select} ${update}"
 
 # Display alert configurations
 if [ "$config" == true ] && [ "$api" ]; then
-    curl -sG "$api" -H "Authorization: Bearer ${token}" | jq
+    eval $curlcmd | jq
 # Perform a dry run
 elif [ "$dry" == true ] && [ "$api" ]; then
     # Output entities that are targeted for update
     echo 'BEFORE:'
-    eval $curlcmd | 
-    jq ".[] | select(.query|test(\"${query}\"))"
+    eval $curlcmd | jq ".[] | select(.query|test(\"${query}\"))"
     echo ''
     # Output entities after update
     echo 'AFTER:'
