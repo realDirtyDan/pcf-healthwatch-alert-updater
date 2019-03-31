@@ -15,10 +15,24 @@ type=0
 query=
 verbose=0
 
+function usage {
+	cat <<EOM
+Usage: $(basename "$0") [OPTION]...
+
+  -a|--api API         healthwatch-api.SYSTEM-DOMAIN/v1/alert-configurations
+  -c|--critical NUM    critical threshold
+  -w|--warning  NUM    warning threshold
+  -t|--type     STRING threeshold type
+  -q|--query    REGEX  alert query search string  
+  -h|--help            show this help            
+EOM
+	exit 2
+}
+
 while :; do
     case $1 in
         -h|-\?|--help)
-            echo 'No help'  # Display a usage synopsis.
+            usage  # Display a usage synopsis.
             exit
             ;;
         -a|--api)           # Takes an option argument; ensure it has been specified.

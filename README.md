@@ -30,7 +30,14 @@ $ uaac token client get healthwatch_api_admin -s <secret>
   
 ## Usage
 ```
-$ ./hw-alert-updater.sh --api--type--critical--warning--query <regex>
+Usage: hw-alert-update.sh [OPTION]...
+
+  -a|--api API          healthwatch-api.SYSTEM-DOMAIN/v1/alert-configurations
+  -c|--critical NUM     critical threshold
+  -w|--warning  NUM     warning threshold
+  -t|--type     STRING  threeshold type
+  -q|--query    REGEX   alert query search string  
+  -h|--help|-?          show this help 
 ```
 
 ## Maintainer
