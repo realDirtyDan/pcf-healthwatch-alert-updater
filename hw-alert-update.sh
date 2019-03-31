@@ -138,7 +138,7 @@ export token=$(uaac context | grep access_token | awk '{print $2}')
 # Setup curl
 curlcmd="curl -sG \"$api\" -H \"Authorization: Bearer ${token}\""
 
-# Setup jq
+# Setup jq dynamic threshold query
 function join { local IFS="$1"; shift; echo "$*"; }
 select=".[] | select(.query|test(\"${query}\")) |"
 thresholds=()
