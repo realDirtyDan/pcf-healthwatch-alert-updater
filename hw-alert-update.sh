@@ -111,5 +111,7 @@ done
 # if --api was provided
 if [ "$api" ] && [ "$critical" ] && [ "$warning" ] && [ "$type" ] && [ "$query" ]; then
     export token=$(uaac context | grep access_token | awk '{print $2}')
-    curl -sG "$api" -H "Authorization: Bearer ${token}" | jq ".[] | select(.query|test(\"$query\")) | .threshold.critical = ${critical} | .threshold.type = \"${type}\" | .threshold.warning = ${warning}" | curl -d @- -H "Authorization: Bearer ${token}" -H "Accept: application/json" -H "Content-Type: application/json" "$api"
+    curl -sG "$api" -H "Authorization: Bearer ${token}" | 
+    jq ".[] | select(.query|test(\"$query\")) | .threshold.critical = ${critical} | .threshold.type = \"${type}\" | .threshold.warning = ${warning}" | 
+    curl -d @- -H "Authorization: Bearer ${token}" -H "Accept: application/json" -H "Content-Type: application/json" "$api"
 fi
