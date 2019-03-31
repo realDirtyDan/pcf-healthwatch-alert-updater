@@ -28,9 +28,9 @@ $ uaac target <cf-uaa> [--skip-ssl-validation]
 $ uaac token client get healthwatch_api_admin -s <secret>
 ```
   
-## Commands
+## Usage
 ```
-$ ./hw-alert-updater.sh --api <healthwatch-api> --type <type> --critical <num> --warning <num> --query <regex>
+$ ./hw-alert-updater.sh --api--type--critical--warning--query <regex>
 ```
 
 ## Maintainer
