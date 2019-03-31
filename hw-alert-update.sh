@@ -135,13 +135,13 @@ done
 # Set token env
 export token=$(uaac context | grep access_token | awk '{print $2}')
 
-function join { local IFS="$1"; shift; echo "$*"; }
+# Setup curl
+curlcmd="curl -sG \"$api\" -H \"Authorization: Bearer ${token}\""
 
 # Setup jq
+function join { local IFS="$1"; shift; echo "$*"; }
 select=".[] | select(.query|test(\"${query}\")) |"
-    
 thresholds=()
-
 if [ "$criticalcheck" == true ]; then
     thresholds+=(".threshold.critical=${critical}")
 fi
@@ -152,6 +152,7 @@ if [ "$warningcheck" == true ]; then
     thresholds+=(".threshold.warning=${warning}") 
 fi
 update=$(join '|' ${thresholds[@]})
+jqquery="${select} ${update}"
 
 # Display alert configurations
 if [ "$config" == true ] && [ "$api" ]; then
@@ -160,15 +161,15 @@ if [ "$config" == true ] && [ "$api" ]; then
 elif [ "$dry" == true ] && [ "$api" ]; then
     # Output entities that are targeted for update
     echo 'BEFORE:'
-    curl -sG "$api" -H "Authorization: Bearer ${token}" | 
+    eval $curlcmd | 
     jq ".[] | select(.query|test(\"${query}\"))"
     echo ''
     # Output entities after update
     echo 'AFTER:'
-    curl -sG "$api" -H "Authorization: Bearer ${token}" | jq "${select} ${update}"   
+    eval $curlcmd | jq "$jqquery"   
 elif [ "$api" ]; then
     # Update entities
-    curl -sG "$api" -H "Authorization: Bearer ${token}" | jq "${select} ${update}" |
+    eval $curlcmd | jq "$jqquery" |
     curl -d @- -H "Authorization: Bearer ${token}" -H "Accept: application/json" -H "Content-Type: application/json" "$api"
 else
     usage
