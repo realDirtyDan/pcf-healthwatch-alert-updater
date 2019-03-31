@@ -137,7 +137,7 @@ export token=$(uaac context | grep access_token | awk '{print $2}')
 
 function join { local IFS="$1"; shift; echo "$*"; }
 
-# Setup update for jq
+# Setup jq
 select=".[] | select(.query|test(\"${query}\")) |"
     
 thresholds=()
