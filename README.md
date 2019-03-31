@@ -35,6 +35,7 @@ $ uaac token client get healthwatch_api_admin -s <secret>
 ```
 Usage: hw-alert-update.sh [OPTION]...
 
+  -d|--dry              show results without making changes to alerts making changes to alerts
   -a|--api      STRING  healthwatch-api.SYSTEM-DOMAIN/v1/alert-configurations
   -c|--critical NUM     critical threshold
   -w|--warning  NUM     warning threshold
