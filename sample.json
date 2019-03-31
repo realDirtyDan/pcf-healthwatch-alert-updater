@@ -1,0 +1,603 @@
+{
+  "query": "origin == 'mysql' and name == '/mysql/available' and deployment == 'cf' and job == 'mysql,database'",
+  "threshold": {
+    "critical": 1,
+    "type": "EQUALITY"
+  }
+}
+{
+  "query": "origin == 'mysql' and name == '/mysql/galera/wsrep_ready' and deployment == 'cf' and job == 'mysql,database'",
+  "threshold": {
+    "critical": 0,
+    "warning": 0.9998999834060669,
+    "type": "LOWER"
+  }
+}
+{
+  "query": "origin == 'locket' and name == 'ActiveLocks'",
+  "threshold": {
+    "critical": 4,
+    "type": "EQUALITY"
+  }
+}
+{
+  "query": "origin == 'locket' and name == 'ActivePresences'",
+  "threshold": {
+    "critical": 200,
+    "warning": 150,
+    "type": "UPPER"
+  }
+}
+{
+  "query": "origin == 'auctioneer' and name == 'AuctioneerFetchStatesDuration'",
+  "threshold": {
+    "critical": 5000000000,
+    "warning": 2000000000,
+    "type": "UPPER"
+  }
+}
+{
+  "query": "origin == 'auctioneer' and name == 'AuctioneerLRPAuctionsFailed'",
+  "threshold": {
+    "critical": 1,
+    "warning": 0.5,
+    "type": "UPPER"
+  }
+}
+{
+  "query": "origin == 'auctioneer' and name == 'AuctioneerLRPAuctionsStarted'",
+  "threshold": {
+    "critical": 100,
+    "warning": 50,
+    "type": "UPPER"
+  }
+}
+{
+  "query": "origin == 'auctioneer' and name == 'AuctioneerTaskAuctionsFailed'",
+  "threshold": {
+    "critical": 1,
+    "warning": 0.5,
+    "type": "UPPER"
+  }
+}
+{
+  "query": "origin == 'gorouter' and name == 'backend_exhausted_conns'",
+  "threshold": {
+    "critical": 10,
+    "warning": 5,
+    "type": "UPPER"
+  }
+}
+{
+  "query": "origin == 'gorouter' and name == 'bad_gateways'",
+  "threshold": {
+    "critical": 40,
+    "warning": 30,
+    "type": "UPPER"
+  }
+}
+{
+  "query": "origin == 'bbs' and name == 'ConvergenceLRPDuration'",
+  "threshold": {
+    "critical": 20000000000,
+    "warning": 10000000000,
+    "type": "UPPER"
+  }
+}
+{
+  "query": "origin == 'bbs' and name == 'CrashedActualLRPs'",
+  "threshold": {
+    "critical": 20,
+    "warning": 10,
+    "type": "UPPER"
+  }
+}
+{
+  "query": "origin == 'healthwatch' and name == 'Diego.AppsDomainSynced'",
+  "threshold": {
+    "critical": 1,
+    "type": "EQUALITY"
+  }
+}
+{
+  "query": "origin == 'healthwatch' and name == 'Diego.AvailableFreeChunks'",
+  "threshold": {
+    "critical": 1,
+    "warning": 2,
+    "type": "LOWER"
+  }
+}
+{
+  "query": "origin == 'healthwatch' and name == 'Diego.AvailableFreeChunksDisk'",
+  "threshold": {
+    "critical": 50,
+    "warning": 100,
+    "type": "LOWER"
+  }
+}
+{
+  "query": "origin == 'healthwatch' and name == 'Diego.LRPsAdded.1H'",
+  "threshold": {
+    "critical": 100,
+    "warning": 50,
+    "type": "UPPER"
+  }
+}
+{
+  "query": "origin == 'healthwatch' and name == 'Diego.TotalAvailableDiskCapacity.5M'",
+  "threshold": {
+    "critical": 6144,
+    "warning": 12288,
+    "type": "LOWER"
+  }
+}
+{
+  "query": "origin == 'healthwatch' and name == 'Diego.TotalAvailableMemoryCapacity.5M'",
+  "threshold": {
+    "critical": 32768,
+    "warning": 65536,
+    "type": "LOWER"
+  }
+}
+{
+  "query": "origin == 'healthwatch' and name == 'Diego.TotalPercentageAvailableContainerCapacity.5M'",
+  "threshold": {
+    "critical": 0.3499999940395355,
+    "warning": 0.4000000059604645,
+    "type": "LOWER"
+  }
+}
+{
+  "query": "origin == 'healthwatch' and name == 'Diego.TotalPercentageAvailableDiskCapacity.5M'",
+  "threshold": {
+    "critical": 0.3499999940395355,
+    "warning": 0.4000000059604645,
+    "type": "LOWER"
+  }
+}
+{
+  "query": "origin == 'healthwatch' and name == 'Diego.TotalPercentageAvailableMemoryCapacity.5M'",
+  "threshold": {
+    "critical": 0.3499999940395355,
+    "warning": 0.4000000059604645,
+    "type": "LOWER"
+  }
+}
+{
+  "query": "origin == 'healthwatch' and name == 'Doppler.MessagesAverage.1M'",
+  "threshold": {
+    "critical": 1000000,
+    "warning": 800000,
+    "type": "UPPER"
+  }
+}
+{
+  "query": "origin == 'gorouter' and name == 'file_descriptors'",
+  "threshold": {
+    "critical": 60000,
+    "warning": 50000,
+    "type": "UPPER"
+  }
+}
+{
+  "query": "origin == 'healthwatch' and name == 'Firehose.LossRate.1M'",
+  "threshold": {
+    "critical": 0.009999999776482582,
+    "warning": 0.004999999888241291,
+    "type": "UPPER"
+  }
+}
+{
+  "query": "origin == 'healthwatch' and name == 'Galera.ClusterStatusSum'",
+  "threshold": {
+    "critical": 0.9998999834060669,
+    "warning": 2.9999001026153564,
+    "type": "LOWER"
+  }
+}
+{
+  "query": "origin == 'healthwatch' and name == 'Galera.TotalPercentageHealthyNodes'",
+  "threshold": {
+    "critical": 0.33320000767707825,
+    "warning": 0.9998999834060669,
+    "type": "LOWER"
+  }
+}
+{
+  "query": "origin == 'healthwatch' and name == 'health.check.bosh.director.probe.available'",
+  "threshold": {
+    "critical": 0.4000000059604645,
+    "warning": 0.6000000238418579,
+    "type": "LOWER"
+  }
+}
+{
+  "query": "origin == 'healthwatch' and name == 'health.check.bosh.director.success'",
+  "threshold": {
+    "critical": 1,
+    "type": "EQUALITY"
+  }
+}
+{
+  "query": "origin == 'healthwatch' and name == 'health.check.CanaryApp.available'",
+  "threshold": {
+    "critical": 0.5,
+    "warning": 0.5,
+    "type": "LOWER"
+  }
+}
+{
+  "query": "origin == 'healthwatch' and name == 'health.check.CanaryApp.probe.available'",
+  "threshold": {
+    "critical": 0.4000000059604645,
+    "warning": 0.6000000238418579,
+    "type": "LOWER"
+  }
+}
+{
+  "query": "origin == 'healthwatch' and name == 'health.check.CanaryApp.responseTime'",
+  "threshold": {
+    "critical": 30000,
+    "warning": 15000,
+    "type": "UPPER"
+  }
+}
+{
+  "query": "origin == 'healthwatch' and name == 'health.check.cliCommand.delete'",
+  "threshold": {
+    "critical": 0,
+    "type": "INEQUALITY"
+  }
+}
+{
+  "query": "origin == 'healthwatch' and name == 'health.check.cliCommand.login'",
+  "threshold": {
+    "critical": 0,
+    "type": "INEQUALITY"
+  }
+}
+{
+  "query": "origin == 'healthwatch' and name == 'health.check.cliCommand.logs'",
+  "threshold": {
+    "critical": 0,
+    "type": "INEQUALITY"
+  }
+}
+{
+  "query": "origin == 'healthwatch' and name == 'health.check.cliCommand.probe.available'",
+  "threshold": {
+    "critical": 0.4000000059604645,
+    "warning": 0.6000000238418579,
+    "type": "LOWER"
+  }
+}
+{
+  "query": "origin == 'healthwatch' and name == 'health.check.cliCommand.push'",
+  "threshold": {
+    "critical": 0,
+    "type": "INEQUALITY"
+  }
+}
+{
+  "query": "origin == 'healthwatch' and name == 'health.check.cliCommand.pushTime'",
+  "threshold": {
+    "critical": 120000,
+    "warning": 60000,
+    "type": "UPPER"
+  }
+}
+{
+  "query": "origin == 'healthwatch' and name == 'health.check.cliCommand.start'",
+  "threshold": {
+    "critical": 0,
+    "type": "INEQUALITY"
+  }
+}
+{
+  "query": "origin == 'healthwatch' and name == 'health.check.cliCommand.stop'",
+  "threshold": {
+    "critical": 0,
+    "type": "INEQUALITY"
+  }
+}
+{
+  "query": "origin == 'healthwatch' and name == 'health.check.OpsMan.available'",
+  "threshold": {
+    "critical": 0.5,
+    "warning": 0.5,
+    "type": "LOWER"
+  }
+}
+{
+  "query": "origin == 'healthwatch' and name == 'health.check.OpsMan.probe.available'",
+  "threshold": {
+    "critical": 0.4000000059604645,
+    "warning": 0.6000000238418579,
+    "type": "LOWER"
+  }
+}
+{
+  "query": "origin == 'healthwatch' and name == 'healthwatch.ui.available'",
+  "threshold": {
+    "critical": 0.4000000059604645,
+    "warning": 0.6000000238418579,
+    "type": "LOWER"
+  }
+}
+{
+  "query": "origin == 'healthwatch' and name == 'ingestor.disconnects'",
+  "threshold": {
+    "critical": 10,
+    "warning": 5,
+    "type": "UPPER"
+  }
+}
+{
+  "query": "origin == 'healthwatch' and name == 'ingestor.dropped'",
+  "threshold": {
+    "critical": 20,
+    "warning": 10,
+    "type": "UPPER"
+  }
+}
+{
+  "query": "origin == 'healthwatch' and name == 'ingestor.ingested'",
+  "threshold": {
+    "critical": 0.009999999776482582,
+    "warning": 0.009999999776482582,
+    "type": "LOWER"
+  }
+}
+{
+  "query": "origin == 'healthwatch' and name == 'ingestor.ingested.boshSystemMetrics'",
+  "threshold": {
+    "critical": 0.009999999776482582,
+    "warning": 0.009999999776482582,
+    "type": "LOWER"
+  }
+}
+{
+  "query": "origin == 'gorouter' and name == 'latency'",
+  "threshold": {
+    "critical": 150,
+    "warning": 100,
+    "type": "UPPER"
+  }
+}
+{
+  "query": "origin == 'gorouter' and name == 'latency.uaa'",
+  "threshold": {
+    "critical": 70000,
+    "warning": 20000,
+    "type": "UPPER"
+  }
+}
+{
+  "query": "origin == 'auctioneer' and name == 'LockHeld'",
+  "threshold": {
+    "critical": 1,
+    "type": "EQUALITY"
+  }
+}
+{
+  "query": "origin == 'bbs' and name == 'LockHeld'",
+  "threshold": {
+    "critical": 1,
+    "type": "EQUALITY"
+  }
+}
+{
+  "query": "origin == 'bbs' and name == 'LRPsExtra'",
+  "threshold": {
+    "critical": 10,
+    "warning": 5,
+    "type": "UPPER"
+  }
+}
+{
+  "query": "origin == 'bbs' and name == 'LRPsMissing'",
+  "threshold": {
+    "critical": 10,
+    "warning": 5,
+    "type": "UPPER"
+  }
+}
+{
+  "query": "origin == 'healthwatch' and name == 'metrics.published'",
+  "threshold": {
+    "critical": 0,
+    "warning": 20,
+    "type": "LOWER"
+  }
+}
+{
+  "query": "origin == 'gorouter' and name == 'ms_since_last_registry_update'",
+  "threshold": {
+    "critical": 30000,
+    "warning": 30000,
+    "type": "UPPER"
+  }
+}
+{
+  "query": "origin == 'healthwatch' and name == 'redis.counterEventQueue.size'",
+  "threshold": {
+    "critical": 10000,
+    "warning": 10000,
+    "type": "UPPER"
+  }
+}
+{
+  "query": "origin == 'healthwatch' and name == 'redis.valueMetricQueue.size'",
+  "threshold": {
+    "critical": 10000,
+    "warning": 10000,
+    "type": "UPPER"
+  }
+}
+{
+  "query": "origin == 'rep' and name == 'RepBulkSyncDuration'",
+  "threshold": {
+    "critical": 10000000000,
+    "warning": 5000000000,
+    "type": "UPPER"
+  }
+}
+{
+  "query": "origin == 'bbs' and name == 'RequestLatency'",
+  "threshold": {
+    "critical": 10000000000,
+    "warning": 5000000000,
+    "type": "UPPER"
+  }
+}
+{
+  "query": "origin == 'gorouter' and name == 'responses.5xx'",
+  "threshold": {
+    "critical": 40,
+    "warning": 30,
+    "type": "UPPER"
+  }
+}
+{
+  "query": "origin == 'route_emitter' and name == 'RouteEmitterSyncDuration'",
+  "threshold": {
+    "critical": 10000000000,
+    "warning": 5000000000,
+    "type": "UPPER"
+  }
+}
+{
+  "query": "origin == 'healthwatch' and name == 'RouteRegistration.MessagesDelta'",
+  "threshold": {
+    "critical": 50,
+    "warning": 30,
+    "type": "UPPER"
+  }
+}
+{
+  "query": "origin == 'uaa' and name == 'server.inflight.count'",
+  "threshold": {
+    "critical": 200,
+    "warning": 150,
+    "type": "UPPER"
+  }
+}
+{
+  "query": "origin == 'healthwatch' and name == 'SyslogDrain.Adapter.BindingsAverage.5M'",
+  "threshold": {
+    "critical": 250,
+    "warning": 200,
+    "type": "UPPER"
+  }
+}
+{
+  "query": "origin == 'healthwatch' and name == 'SyslogDrain.Adapter.LossRate.1M'",
+  "threshold": {
+    "critical": 0.10000000149011612,
+    "warning": 0.009999999776482582,
+    "type": "UPPER"
+  }
+}
+{
+  "query": "origin == 'healthwatch' and name == 'SyslogDrain.RLP.LossRate.1M'",
+  "threshold": {
+    "critical": 0.10000000149011612,
+    "warning": 0.009999999776482582,
+    "type": "UPPER"
+  }
+}
+{
+  "query": "origin == 'bosh-system-metrics-forwarder' and name == 'system.cpu.user'",
+  "threshold": {
+    "critical": 95,
+    "warning": 85,
+    "type": "UPPER"
+  }
+}
+{
+  "query": "origin == 'bosh-system-metrics-forwarder' and name == 'system.cpu.user' and job == 'router'",
+  "threshold": {
+    "critical": 70,
+    "warning": 60,
+    "type": "UPPER"
+  }
+}
+{
+  "query": "origin == 'bosh-system-metrics-forwarder' and name == 'system.cpu.user' and job == 'uaa,control'",
+  "threshold": {
+    "critical": 90,
+    "warning": 80,
+    "type": "UPPER"
+  }
+}
+{
+  "query": "origin == 'bosh-system-metrics-forwarder' and name == 'system.disk.ephemeral.percent'",
+  "threshold": {
+    "critical": 90,
+    "warning": 80,
+    "type": "UPPER"
+  }
+}
+{
+  "query": "origin == 'bosh-system-metrics-forwarder' and name == 'system.disk.persistent.percent'",
+  "threshold": {
+    "critical": 90,
+    "warning": 80,
+    "type": "UPPER"
+  }
+}
+{
+  "query": "origin == 'bosh-system-metrics-forwarder' and name == 'system.disk.system.percent'",
+  "threshold": {
+    "critical": 90,
+    "warning": 80,
+    "type": "UPPER"
+  }
+}
+{
+  "query": "origin == 'bosh-system-metrics-forwarder' and name == 'system.healthy'",
+  "threshold": {
+    "critical": 0.4000000059604645,
+    "warning": 0.6000000238418579,
+    "type": "LOWER"
+  }
+}
+{
+  "query": "origin == 'bosh-system-metrics-forwarder' and name == 'system.mem.percent'",
+  "threshold": {
+    "critical": 95,
+    "warning": 85,
+    "type": "UPPER"
+  }
+}
+{
+  "query": "origin == 'gorouter' and name == 'total_requests'",
+  "threshold": {
+    "critical": 125000,
+    "warning": 100000,
+    "type": "UPPER"
+  }
+}
+{
+  "query": "origin == 'gorouter' and name == 'total_routes'",
+  "threshold": {
+    "critical": 200,
+    "warning": 100,
+    "type": "UPPER"
+  }
+}
+{
+  "query": "origin == 'healthwatch' and name == 'uaa.throughput.rate'",
+  "threshold": {
+    "critical": 15000,
+    "warning": 12000,
+    "type": "UPPER"
+  }
+}
+{
+  "query": "origin == 'rep' and name == 'UnhealthyCell'",
+  "threshold": {
+    "critical": 0,
+    "type": "EQUALITY"
+  }
+}
