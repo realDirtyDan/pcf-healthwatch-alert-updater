@@ -35,17 +35,17 @@ $ uaac token client get healthwatch_api_admin -s <secret>
 ```
 Usage: 
  
-  hw-alert-update.sh -a <url> -q <regexp> [-c <num>] [-w <num>] [t <text>] [-d]
+  hw-alert-update.sh -a <url> -q <regexp> ([-c <num>] [-w <num>] [-t <text>]){1,} [-d]
   hw-alert-update.sh -a <url> --get-config [-q <regexp>]
       
-  --get-config          show current alert configuration
-  -d|--dry              show results without making changes to alerts
-  -a|--api      STRING  healthwatch-api.SYSTEM-DOMAIN/v1/alert-configurations
-  -c|--critical NUM     critical threshold
-  -w|--warning  NUM     warning threshold
-  -t|--type     STRING  threshold type
-  -q|--query    REGEX   alert query search string  
-  -h|--help             show this help            
+  --get-config           show current alert configuration
+  -d|--dry               show results without making changes to alerts
+  -a|--api      <text>   healthwatch-api.SYSTEM-DOMAIN/v1/alert-configurations
+  -c|--critical <num>    critical threshold
+  -w|--warning  <num>    warning threshold
+  -t|--type     <text>   threshold type
+  -q|--query    <regexp> alert query search string  
+  -h|--help              show this help            
 
 Examples:
 
@@ -57,7 +57,7 @@ Examples:
 
 ## Example
 
-*CAUTION* - It's highly recommended that you do a dry run first and that you use well defined queries:
+*CAUTION* - It's recommended that you do a --dry run first:
 
 ```
 $ ./hw-alert-update.sh -a healthwatch-api.run-11.haas-59.pez.pivotal.io/v1/alert-configurations -w 20000 -q 'latency.uaa' --dry
@@ -82,7 +82,7 @@ AFTER:
 }
 ```
 
-If things look correct run without the `--dry` option to commit the change:
+Run without the `--dry` option to commit the change:
 
 ```
 $ ./hw-alert-update.sh -a healthwatch-api.run-11.haas-59.pez.pivotal.io/v1/alert-configurations -w 20000 -q 'latency.uaa'

@@ -27,19 +27,20 @@ querycheck=false
 # Define usage
 function usage {
     cat <<EOM
+
 Usage: 
  
-  $(basename "$0") -a <url> -q <regexp> [-c <num>] [-w <num>] [t <text>] [-d]
+  $(basename "$0") -a <url> -q <regexp> ([-c <num>] [-w <num>] [-t <text>]){1,} [-d]
   $(basename "$0") -a <url> --get-config [-q <regexp>]
       
-  --get-config          show current alert configuration
-  -d|--dry              show results without making changes to alerts
-  -a|--api      STRING  healthwatch-api.SYSTEM-DOMAIN/v1/alert-configurations
-  -c|--critical NUM     critical threshold
-  -w|--warning  NUM     warning threshold
-  -t|--type     STRING  threshold type
-  -q|--query    REGEX   alert query search string  
-  -h|--help             show this help            
+  --get-config           show current alert configuration
+  -d|--dry               show results without making changes to alerts
+  -a|--api      <text>   healthwatch-api.SYSTEM-DOMAIN/v1/alert-configurations
+  -c|--critical <num>    critical threshold
+  -w|--warning  <num>    warning threshold
+  -t|--type     <text>   threshold type
+  -q|--query    <regexp> alert query search string  
+  -h|--help              show this help            
 
 Examples:
 
@@ -47,6 +48,7 @@ Examples:
   $ ./hw-alert-update.sh -a healthwatch-api.SYSTEM-DOMAIN/v1/alert-configurations --get-config -q 'uaa'
   $ ./hw-alert-update.sh -a healthwatch-api.SYSTEM-DOMAIN/v1/alert-configurations -c 200 -q 'latency.uaa' --dry
   $ ./hw-alert-update.sh -a healthwatch-api.SYSTEM-DOMAIN/v1/alert-configurations -c 200 -q 'latency.uaa'
+
 EOM
     exit 2
 }
@@ -168,7 +170,7 @@ basicselect=".[] | select(.query|test(\"${query}\"))"
 if [ "$config" == true ] && [ "$api" ]; then
     eval $curlcmd | jq "$basicselect"
 # Perform a dry run based on dynamic threshold update query
-elif [ "$dry" == true ] && [ "$api" ]; then
+elif [ "$api" ] && [ "$dry" == true ] && [ "${#threshold[@]}" -gt 0 ]; then
     # Output entities that are targeted for update
     echo 'BEFORE:'
     eval $curlcmd | jq "$basicselect"
@@ -177,7 +179,7 @@ elif [ "$dry" == true ] && [ "$api" ]; then
     echo 'AFTER:'
     eval $curlcmd | jq "$jqquery"   
 # Update entities based on dynamic threshold update query
-elif [ "$api" ] && [ "$querycheck" == true ]; then
+elif [ "$api" ] && [ "$querycheck" == true ] && [ "${#threshold[@]}" -gt 0 ]; then
     # Do not allow more that one metric update at a time
     if [ $(eval $curlcmd | jq "$basicselect" | wc -l) -le 8 ]; then
         eval $curlcmd | jq "$jqquery" |
