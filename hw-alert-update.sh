@@ -170,7 +170,7 @@ basicselect=".[] | select(.query|test(\"${query}\"))"
 if [ "$config" == true ] && [ "$api" ]; then
     eval $curlcmd | jq "$basicselect"
 # Perform a dry run based on dynamic threshold update query
-elif [ "$api" ] && [ "$dry" == true ] && [ "${#threshold[@]}" -gt 0 ]; then
+elif [ "$api" ] && [ "$dry" == true ] && [ "${#thresholds[@]}" -gt 0 ]; then
     # Output entities that are targeted for update
     echo 'BEFORE:'
     eval $curlcmd | jq "$basicselect"
@@ -179,7 +179,7 @@ elif [ "$api" ] && [ "$dry" == true ] && [ "${#threshold[@]}" -gt 0 ]; then
     echo 'AFTER:'
     eval $curlcmd | jq "$jqquery"   
 # Update entities based on dynamic threshold update query
-elif [ "$api" ] && [ "$querycheck" == true ] && [ "${#threshold[@]}" -gt 0 ]; then
+elif [ "$api" ] && [ "$querycheck" == true ] && [ "${#thresholds[@]}" -gt 0 ]; then
     # Do not allow more that one metric update at a time
     if [ $(eval $curlcmd | jq "$basicselect" | wc -l) -le 8 ]; then
         eval $curlcmd | jq "$jqquery" |
