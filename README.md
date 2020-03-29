@@ -55,6 +55,9 @@ Examples:
   $ ./hw-alert-update.sh -a healthwatch-api.SYSTEM-DOMAIN/v1/alert-configurations -c 200 -q 'latency.uaa'
 ```
 
+## Usage
+*NOTICE* - more Usage opts can be added w/ additional switches (i.e. -x) 
+
 ## Example
 
 *CAUTION* - It's recommended that you do a --dry run first:
