@@ -56,7 +56,7 @@ Examples:
 ```
 
 ## Usage
-*NOTICE* - more Usage opts can be added w/ additional switches (i.e. -<foo>  
+*NOTICE* - more Usage opts can be added w/ additional switches (i.e. -x) 
 
 ## Example
 
